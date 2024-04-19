@@ -10,7 +10,10 @@
 		"rmrf",
 		"ryansonshine",
 		"socio",
-		"tsdoc"
+		"tsdoc",
+		"wavesurfer",
+		"ondataavailable",
+		"noops"
 	],
 	"flagWords": [],
 	"ignorePaths": [
