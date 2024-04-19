@@ -38,7 +38,7 @@ export type RecordPluginEvents = BasePluginEvents & {
 	"record-progress": [duration: number];
 };
 
-type MicStream = {
+export type MicStream = {
 	onDestroy: () => void;
 	onEnd: () => void;
 };
