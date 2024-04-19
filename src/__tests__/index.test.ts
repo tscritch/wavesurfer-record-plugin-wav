@@ -1,16 +1,13 @@
 import * as assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { foobar } from "../index.js";
+import RecordPlugin from "../index.js";
 
-await describe("foobar()", async () => {
-	await describe("given two positive integers", async () => {
-		const first = 1;
-		const second = 2;
-
-		await describe("when called", async () => {
-			await it("returns the sum of them multiplied by 3", () => {
-				assert.equal(foobar(first, second), 9);
+await describe("RecordPlugin", async () => {
+	await describe("given the plugin", async () => {
+		await describe("create is a static function", async () => {
+			await it("and it really is, isn't it", () => {
+				assert.equal(typeof RecordPlugin.create, "function");
 			});
 		});
 	});

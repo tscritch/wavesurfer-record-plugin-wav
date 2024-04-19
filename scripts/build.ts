@@ -10,8 +10,8 @@ async function build() {
 	const buildId = randomUUID().replace(/-/g, "");
 
 	return await esbuild({
-		platform: "node",
-		target: "node21",
+		platform: "browser",
+		target: "es2019",
 		format: "esm",
 		nodePaths: [srcPath],
 		sourcemap: true,

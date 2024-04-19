@@ -32,6 +32,13 @@
 		"cz": "cz",
 		"semantic-release": "semantic-release"
 	},
+	"dependencies": {
+		"extendable-media-recorder": "^9.1.11",
+    "extendable-media-recorder-wav-encoder": "^7.0.106"
+	},
+	"peerDependencies": {
+		"wavesurfer.js": "^7.7.3"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.6.4",
 		"@microsoft/api-extractor": "^7.43.0",
