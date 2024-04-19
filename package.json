@@ -34,7 +34,7 @@
 	},
 	"dependencies": {
 		"extendable-media-recorder": "^9.1.11",
-    "extendable-media-recorder-wav-encoder": "^7.0.106"
+		"extendable-media-recorder-wav-encoder": "^7.0.106"
 	},
 	"peerDependencies": {
 		"wavesurfer.js": "^7.7.3"

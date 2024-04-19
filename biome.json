@@ -8,6 +8,12 @@
 			"all": true,
 			"nursery": {
 				"noNodejsModules": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
+			},
+			"style": {
+				"noDefaultExport": "off"
 			}
 		}
 	}

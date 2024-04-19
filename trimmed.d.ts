@@ -1,83 +1,86 @@
-import BasePlugin from 'wavesurfer.js/dist//base-plugin.js';
-import { BasePluginEvents } from 'wavesurfer.js/dist//base-plugin.js';
+import BasePlugin from "wavesurfer.js/dist//base-plugin.js";
+import type { BasePluginEvents } from "wavesurfer.js/dist//base-plugin.js";
 
 declare type MicStream = {
-    onDestroy: () => void;
-    onEnd: () => void;
+	onDestroy: () => void;
+	onEnd: () => void;
 };
 
-declare class RecordPlugin extends BasePlugin<RecordPluginEvents, RecordPluginOptions> {
-    private stream;
-    private mediaRecorder;
-    private dataWindow;
-    private isWaveformPaused;
-    private originalOptions;
-    private timer;
-    private lastStartTime;
-    private lastDuration;
-    private duration;
-    /** Create an instance of the Record plugin */
-    constructor(options: RecordPluginOptions);
-    /** Create an instance of the Record plugin */
-    static create(options?: RecordPluginOptions): RecordPlugin;
-    renderMicStream(stream: MediaStream): MicStream;
-    /** Request access to the microphone and start monitoring incoming audio */
-    startMic(options?: RecordPluginDeviceOptions): Promise<MediaStream>;
-    /** Stop monitoring incoming audio */
-    stopMic(): void;
-    /** Start recording audio from the microphone */
-    startRecording(options?: RecordPluginDeviceOptions): Promise<void>;
-    /** Get the duration of the recording */
-    getDuration(): number;
-    /** Check if the audio is being recorded */
-    isRecording(): boolean;
-    isPaused(): boolean;
-    isActive(): boolean;
-    /** Stop the recording */
-    stopRecording(): void;
-    /** Pause the recording */
-    pauseRecording(): void;
-    /** Resume the recording */
-    resumeRecording(): void;
-    /** Get a list of available audio devices
-     * You can use this to get the device ID of the microphone to use with the startMic and startRecording methods
-     * Will return an empty array if the browser doesn't support the MediaDevices API or if the user has not granted access to the microphone
-     * You can ask for permission to the microphone by calling startMic
-     */
-    static getAvailableAudioDevices(): Promise<MediaDeviceInfo[]>;
-    /** Destroy the plugin */
-    destroy(): void;
-    private applyOriginalOptionsIfNeeded;
+declare class RecordPlugin extends BasePlugin<
+	RecordPluginEvents,
+	RecordPluginOptions
+> {
+	private stream;
+	private mediaRecorder;
+	private dataWindow;
+	private isWaveformPaused;
+	private originalOptions;
+	private timer;
+	private lastStartTime;
+	private lastDuration;
+	private duration;
+	/** Create an instance of the Record plugin */
+	constructor(options: RecordPluginOptions);
+	/** Create an instance of the Record plugin */
+	static create(options?: RecordPluginOptions): RecordPlugin;
+	renderMicStream(stream: MediaStream): MicStream;
+	/** Request access to the microphone and start monitoring incoming audio */
+	startMic(options?: RecordPluginDeviceOptions): Promise<MediaStream>;
+	/** Stop monitoring incoming audio */
+	stopMic(): void;
+	/** Start recording audio from the microphone */
+	startRecording(options?: RecordPluginDeviceOptions): Promise<void>;
+	/** Get the duration of the recording */
+	getDuration(): number;
+	/** Check if the audio is being recorded */
+	isRecording(): boolean;
+	isPaused(): boolean;
+	isActive(): boolean;
+	/** Stop the recording */
+	stopRecording(): void;
+	/** Pause the recording */
+	pauseRecording(): void;
+	/** Resume the recording */
+	resumeRecording(): void;
+	/** Get a list of available audio devices
+	 * You can use this to get the device ID of the microphone to use with the startMic and startRecording methods
+	 * Will return an empty array if the browser doesn't support the MediaDevices API or if the user has not granted access to the microphone
+	 * You can ask for permission to the microphone by calling startMic
+	 */
+	static getAvailableAudioDevices(): Promise<MediaDeviceInfo[]>;
+	/** Destroy the plugin */
+	destroy(): void;
+	private applyOriginalOptionsIfNeeded;
 }
 export default RecordPlugin;
 
 export declare type RecordPluginDeviceOptions = {
-    /** The device ID of the microphone to use */
-    deviceId?: string | {
-        exact: string;
-    };
+	/** The device ID of the microphone to use */
+	deviceId?:
+		| string
+		| {
+				exact: string;
+		  };
 };
 
 export declare type RecordPluginEvents = BasePluginEvents & {
-    "record-start": [];
-    "record-pause": [blob: Blob];
-    "record-resume": [];
-    "record-end": [blob: Blob];
-    /** Fires continuously while recording */
-    "record-progress": [duration: number];
+	"record-start": [];
+	"record-pause": [blob: Blob];
+	"record-resume": [];
+	"record-end": [blob: Blob];
+	/** Fires continuously while recording */
+	"record-progress": [duration: number];
 };
 
 export declare type RecordPluginOptions = {
-    /** The MIME type to use when recording audio */
-    mimeType?: MediaRecorderOptions["mimeType"];
-    /** The audio bitrate to use when recording audio, defaults to 128000 to avoid a VBR encoding. */
-    audioBitsPerSecond?: MediaRecorderOptions["audioBitsPerSecond"];
-    /** Whether to render the recorded audio, true by default */
-    renderRecordedAudio?: boolean;
-    /** Whether to render the scrolling waveform, false by default */
-    scrollingWaveform?: boolean;
-    /** The duration of the scrolling waveform window, defaults to 5 seconds */
-    scrollingWaveformWindow?: number;
+	/** The MIME type to use when recording audio */
+	mimeType?: MediaRecorderOptions["mimeType"];
+	/** The audio bitrate to use when recording audio, defaults to 128000 to avoid a VBR encoding. */
+	audioBitsPerSecond?: MediaRecorderOptions["audioBitsPerSecond"];
+	/** Whether to render the recorded audio, true by default */
+	renderRecordedAudio?: boolean;
+	/** Whether to render the scrolling waveform, false by default */
+	scrollingWaveform?: boolean;
+	/** The duration of the scrolling waveform window, defaults to 5 seconds */
+	scrollingWaveformWindow?: number;
 };
-
-export { }
