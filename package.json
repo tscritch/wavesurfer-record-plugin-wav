@@ -2,8 +2,6 @@
 	"name": "wavesurfer-record-plugin-wav",
 	"version": "0.0.0-development",
 	"type": "module",
-	"exports": "./build/index.js",
-	"types": "./build/index.d.ts",
 	"license": "MIT",
 	"engines": {
 		"node": "^21.7.1",
@@ -16,9 +14,22 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"files": ["dist"],
+	"main": "./dist/index.js",
+	"unpkg": "./dist/index.min.js",
+	"module": "./dist/index.js",
+	"browser": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.cjs"
+		}
+	},
 	"scripts": {
-		"build": "npm run clean && npm run type:dts && npm run type:extract && npm run build:src",
-		"build:src": "node --import=@nitrogql/esbuild-register ./scripts/build.ts",
+		"build:old": "npm run clean && npm run type:dts && npm run type:extract && npm run build:src",
+		"build": "rm -rf dist && tsc && rollup -c",
 		"clean": "rimraf build coverage",
 		"type:dts": "tsc --emitDeclarationOnly --project tsconfig.build.json",
 		"type:extract": "api-extractor run && rimraf --glob \"./build/*\" && mv trimmed.d.ts build/index.d.ts",
@@ -43,6 +54,8 @@
 		"@biomejs/biome": "^1.6.4",
 		"@microsoft/api-extractor": "^7.43.0",
 		"@nitrogql/esbuild-register": "^1.7.0-beta.2",
+		"@rollup/plugin-terser": "^0.4.3",
+		"@rollup/plugin-typescript": "^11.1.2",
 		"@ryansonshine/commitizen": "^4.2.8",
 		"@ryansonshine/cz-conventional-changelog": "^3.3.4",
 		"@semantic-release/changelog": "^6.0.3",
@@ -50,12 +63,16 @@
 		"@semantic-release/github": "^10.0.2",
 		"@semantic-release/npm": "^12.0.0",
 		"@semantic-release/release-notes-generator": "^13.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.57.0",
+		"@typescript-eslint/parser": "^5.57.0",
 		"@types/node": "^20.11.30",
 		"@types/prompts": "^2.4.9",
 		"c8": "^9.1.0",
 		"cspell": "^8.6.0",
 		"esbuild": "^0.20.2",
 		"rimraf": "^5.0.5",
+		"rollup": "^3.26.2",
+		"rollup-plugin-dts": "^6.1.0",
 		"semantic-release": "^23.0.7",
 		"typescript": "^5.4.3"
 	}
