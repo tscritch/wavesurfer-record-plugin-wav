@@ -18,21 +18,24 @@ npm install wavesurfer-record-plugin-wav
 yarn install wavesurfer-record-plugin-wav
 ```
 
+### Example
+Songleaf - [Audio Workbench](https://workbench.songleaf.app/recording)
+
 ### Usage
 
 Use this as you would the default [Wavesurfer.js Record Plugin](https://wavesurfer.xyz/examples/?record.js)
 
 When creating and registering the plugin, make sure to set `mimeType` to `"audio/wav"`
 
-```
-wavesurfer = WaveSurfer.create({
-    container: '#mic',
-    waveColor: 'rgb(200, 0, 200)',
-    progressColor: 'rgb(100, 0, 100)',
-  })
+```javascript
+import WaveSurfer from "wavesurfer.js"
+import RecordPlugin from "wavesurfer-record-plugin-wav"
+
+...
+
+wavesurfer = WaveSurfer.create(...)
 
 record = wavesurfer.registerPlugin(RecordPlugin.create({
-	renderRecordedAudio: false,
   mimeType: "audio/wav",
 }))
 ```
