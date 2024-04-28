@@ -180,7 +180,7 @@ class RecordPlugin extends BasePlugin<RecordPluginEvents, RecordPluginOptions> {
 	): Promise<MediaStream> {
 		let stream: MediaStream;
 		try {
-			if (!MediaRecorder.isTypeSupported("audio/wav")) {
+			if (!MediaRecorderPolyfill.isTypeSupported("audio/wav")) {
 				const connect = (await import("extendable-media-recorder-wav-encoder"))
 					.connect;
 				const con = await connect();
