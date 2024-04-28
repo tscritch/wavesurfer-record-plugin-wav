@@ -5,6 +5,7 @@
 import {
 	type IMediaRecorder,
 	MediaRecorder as MediaRecorderPolyfill,
+	register as registerMediaRecorder,
 } from "extendable-media-recorder";
 import BasePlugin, {
 	type BasePluginEvents,
@@ -179,13 +180,14 @@ class RecordPlugin extends BasePlugin<RecordPluginEvents, RecordPluginOptions> {
 	): Promise<MediaStream> {
 		let stream: MediaStream;
 		try {
-			const connect = (await import("extendable-media-recorder-wav-encoder"))
-				.connect;
-			const con = await connect();
+			if (!MediaRecorder.isTypeSupported("audio/wav")) {
+				const connect = (await import("extendable-media-recorder-wav-encoder"))
+					.connect;
+				const con = await connect();
 
-			const register = (await import("extendable-media-recorder")).register;
+				await registerMediaRecorder(con);
+			}
 
-			await register(con);
 			stream = await navigator.mediaDevices.getUserMedia({
 				audio: options?.deviceId ? { deviceId: options.deviceId } : true,
 			});
